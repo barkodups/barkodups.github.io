@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halil ARSLAN Barkod V1.0</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet"> <!-- Google Fonts Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* Sayfa boyutunu ve içeriği ortalamak için CSS */
         body {
-            font-family: 'Montserrat', sans-serif; /* Montserrat fontu */
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -16,10 +16,8 @@
             margin: 0;
             flex-direction: column;
             text-align: center;
-
-            /* Hardal sarısı ve kahverengi geçiş arka planı */
-            background: linear-gradient(to bottom right, #D4A017, #6F4F1F); /* Hardal sarısı ve kahverengi */
-            background-attachment: fixed; /* Arka planın sabitlenmesi */
+            background: linear-gradient(to bottom right, #D4A017, #6F4F1F);
+            background-attachment: fixed;
         }
 
         input {
@@ -29,49 +27,64 @@
             width: 250px;
             text-align: center;
             border-radius: 5px;
-            border: 2px solid #fff; /* Beyaz kenarlık */
-            background-color: rgba(255, 255, 255, 0.8); /* Hafif şeffaf beyaz arka plan */
-            font-family: 'Montserrat', sans-serif; /* Montserrat fontu */
+            border: 2px solid #fff;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-family: 'Montserrat', sans-serif;
         }
 
         button {
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #6F4F1F; /* Kahverengi buton rengi */
+            background-color: #6F4F1F;
             color: white;
             border: none;
             border-radius: 5px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
-            font-family: 'Montserrat', sans-serif; /* Montserrat fontu */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
         }
 
         button:hover {
-            background-color: #5e4315; /* Buton hover rengi */
+            background-color: #5e4315;
         }
 
         h1 {
             font-size: 24px;
             color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Yazılara hafif gölge */
-            font-family: 'Montserrat', sans-serif; /* Montserrat fontu */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Montserrat', sans-serif;
         }
 
-        /* Logo ayarları */
         #logo {
             margin-bottom: 20px;
         }
 
-        /* Alt metin için stil */
+        #logoutButton {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #6F4F1F;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            border-radius: 5px;
+        }
+
+        #logoutButton:hover {
+            background-color: #5e4315;
+        }
+
         .footer {
             margin-top: 30px;
             font-size: 16px;
             color: white;
             text-align: left;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5); /* Hafif şeffaf siyah arka plan */
+            background-color: rgba(0, 0, 0, 0.5);
             border-radius: 5px;
-            font-family: 'Montserrat', sans-serif; /* Montserrat fontu */
+            font-family: 'Montserrat', sans-serif;
         }
 
         .button-container {
@@ -86,7 +99,6 @@
             display: inline-block;
         }
 
-        /* Şifre giriş formu için stil */
         .password-container {
             display: flex;
             flex-direction: column;
@@ -110,11 +122,10 @@
             color: white;
             margin-top: 20px;
             padding: 10px;
-            background-color: rgba(0, 0, 0, 0.5); /* Hafif şeffaf siyah arka plan */
+            background-color: rgba(0, 0, 0, 0.5);
             border-radius: 5px;
             text-align: left;
         }
-
     </style>
 </head>
 <body>
@@ -124,7 +135,6 @@
         <input type="password" id="passwordInput" placeholder="Şifrenizi girin" onkeydown="checkPasswordEnter(event)">
         <button onclick="checkPassword()">Giriş Yap</button>
 
-        <!-- Güncellemelerle ilgili notlar -->
         <div class="update-notes">
             <h2>Güncellemeler:</h2>
             <ul>
@@ -136,9 +146,9 @@
     </div>
 
     <div id="mainPage" style="display: none;">
+        <button id="logoutButton" onclick="logout()">Çıkış Yap</button>
         <img id="logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/United_Parcel_Service_logo_2014.svg/52px-United_Parcel_Service_logo_2014.svg.png" alt="UPS Logo">
 
-        <!-- Butonlar hemen burada logonun altına ekleniyor -->
         <div class="button-container">
             <a href="https://opf.ups.com.tr/Data/Query" target="_blank"><button>OPF Portal</button></a>
             <a href="https://opf.ups.com.tr/controltower/Login/Index" target="_blank"><button>ControlTower</button></a>
@@ -162,7 +172,6 @@
         <h1>Not: En fazla 100 kaplı barkod yazdırabilirsiniz.</h1>
         <h1>Toplu yazdırma için anakabın barkodunu girmelisiniz! 😊</h1>
 
-        <!-- Alt metin için stil -->
         <div class="footer">
             <ul>
                 <li> Teslim edilmiş gönderinin barkodu yazdırılamaz.</li>
@@ -215,10 +224,17 @@
             var code = document.getElementById("secondCodeInput").value;
             if (code.length === 18) {
                 var url = `https://opf.ups.com.tr/Barcode?Waybill=${code}%20%20|0,`;
-                window.open(url, '_blank'); // Farklı bir link örneği
+                window.open(url, '_blank');
             } else {
                 alert("Lütfen 18 haneli takip numarasını girin. Daha sonra alttaki Yazdır butonuna basın :)");
             }
+        }
+
+        function logout() {
+            // Çıkış yapmak için localStorage'dan oturumu sil
+            localStorage.removeItem('authenticated');
+            document.getElementById("passwordPage").style.display = "block";
+            document.getElementById("mainPage").style.display = "none";
         }
     </script>
 </body>
