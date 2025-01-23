@@ -74,44 +74,16 @@
             font-family: 'Montserrat', sans-serif; /* Montserrat fontu */
         }
 
-        /* Butonların sağdan sola kaymasını sağlamak için CSS */
         .button-container {
             display: flex;
             justify-content: center;
             gap: 10px;
             margin-top: 20px;
-            animation: slideIn 2s ease-out forwards;
         }
 
         .button-container a {
             text-decoration: none;
             display: inline-block;
-        }
-
-        .button-container button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            background-color: #6F4F1F; /* Kahverengi buton rengi */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge efekti */
-            font-family: 'Montserrat', sans-serif; /* Montserrat fontu */
-        }
-
-        .button-container button:hover {
-            background-color: #5e4315; /* Buton hover rengi */
-        }
-
-        /* Butonların sağdan sola kayma animasyonu */
-        @keyframes slideIn {
-            0% {
-                transform: translateX(100%);
-            }
-            100% {
-                transform: translateX(0);
-            }
         }
 
         /* Şifre giriş formu için stil */
@@ -133,14 +105,34 @@
             width: 250px;
         }
 
+        .update-notes {
+            font-size: 16px;
+            color: white;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5); /* Hafif şeffaf siyah arka plan */
+            border-radius: 5px;
+            text-align: left;
+        }
+
     </style>
 </head>
 <body>
 
     <div id="passwordPage" class="password-container">
         <h1>Sayfaya Erişim İçin Şifre Girin</h1>
-        <input type="password" id="passwordInput" placeholder="Şifrenizi girin">
+        <input type="password" id="passwordInput" placeholder="Şifrenizi girin" onkeydown="checkPasswordEnter(event)">
         <button onclick="checkPassword()">Giriş Yap</button>
+
+        <!-- Güncellemelerle ilgili notlar -->
+        <div class="update-notes">
+            <h2>Güncellemeler:</h2>
+            <ul>
+                <li>Sayfayı F5 (Yenile) yaptığınızda şifre giriş ekranına atma problemi kaldırıldı.</li>
+                <li>Toplu barkodun 1 parçasını yazdırmanız için ayrı bir giriş bölümü eklendi.</li>
+                <li>Toplu barkodu yazdırmanız için yine anakap takip numarası girmeniz gerekecektir.</li>
+            </ul>
+        </div>
     </div>
 
     <div id="mainPage" style="display: none;">
@@ -154,12 +146,22 @@
             <a href="https://tundraapps-tpd.ups.com/tpd" target="_blank"><button>UPS TPD</button></a>
         </div>
 
-        <h1>UPS Takip Numarasını Yazın.</h1>
-        <input type="text" id="codeInput" maxlength="18" placeholder="Takip numarasını yaz mübarek.">
-        <button onclick="redirectToURL()">Yazdır</button>
+        <h1>UPS Takip Numarasını Yazın(Tekli Barkod).</h1>
+        <div>
+            <input type="text" id="secondCodeInput" maxlength="18" placeholder="Tek barkod için takip no yaz.">
+            <button onclick="redirectToTekliURL()">Yazdır (Tekli)</button>
+        </div>
+
+        <h1>UPS Takip Numarasını Yazın(Toplu Barkod).</h1>
+        <div>
+            <input type="text" id="codeInput" maxlength="18" placeholder="Toplu barkod için takip no yaz.">
+            <button onclick="redirectToAnakapURL()">Yazdır (Toplu)</button>
+        </div>
+        
         <h1>Samsun İlkadım SS Halil ARSLAN tarafından geliştirilmiştir. 👍</h1>
         <h1>Not: En fazla 100 kaplı barkod yazdırabilirsiniz.</h1>
-        <h1>Anakabın barkodunu girmelisiniz! 😊</h1>
+        <h1>Toplu yazdırma için anakabın barkodunu girmelisiniz! 😊</h1>
+
         <!-- Alt metin için stil -->
         <div class="footer">
             <ul>
@@ -173,9 +175,19 @@
     </div>
 
     <script>
+        // Sayfa yüklendiğinde şifre kontrolü yap
+        window.onload = function() {
+            if(localStorage.getItem('authenticated') === 'true') {
+                document.getElementById("passwordPage").style.display = "none";
+                document.getElementById("mainPage").style.display = "block";
+            }
+        }
+
         function checkPassword() {
             var password = document.getElementById("passwordInput").value;
             if (password === "ups12345") {
+                // Şifre doğruysa localStorage'da oturumu kaydet
+                localStorage.setItem('authenticated', 'true');
                 document.getElementById("passwordPage").style.display = "none";
                 document.getElementById("mainPage").style.display = "block";
             } else {
@@ -183,13 +195,29 @@
             }
         }
 
-        function redirectToURL() {
+        function checkPasswordEnter(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        }
+
+        function redirectToAnakapURL() {
             var code = document.getElementById("codeInput").value;
             if (code.length === 18) {
                 var url = `https://opf.ups.com.tr/Barcode?Waybill=${code}%20%20|0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99`;
-                window.open(url, '_blank');  // Sayfayı yeni sekmede açma
+                window.open(url, '_blank');
             } else {
-                alert("Lütfen 18 haneli takip no girin. Daha sonra alttaki Yazdır butonuna basın :)");
+                alert("Lütfen 18 haneli takip numarasını girin. Daha sonra alttaki Yazdır butonuna basın :)");
+            }
+        }
+
+        function redirectToTekliURL() {
+            var code = document.getElementById("secondCodeInput").value;
+            if (code.length === 18) {
+                var url = `https://opf.ups.com.tr/Barcode?Waybill=${code}%20%20|0,`;
+                window.open(url, '_blank'); // Farklı bir link örneği
+            } else {
+                alert("Lütfen 18 haneli takip numarasını girin. Daha sonra alttaki Yazdır butonuna basın :)");
             }
         }
     </script>
