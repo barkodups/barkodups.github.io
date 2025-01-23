@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halil ARSLAN Barkod V1.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* Sayfa boyutunu ve içeriği ortalamak için CSS */
@@ -126,11 +127,34 @@
             border-radius: 5px;
             text-align: left;
         }
+
+        /* Yeni yazı tipi ve renk */
+        .highlight-text {
+            font-family: 'Dancing Script', cursive;
+            color: #FFFFFF; /* Beyaz renk */
+            font-size: 40px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .sub-text {
+            font-family: 'Dancing Script', cursive;
+            color: #FFD700; /* Altın sarısı */
+            font-size: 24px;
+            margin-top: 0;
+            letter-spacing: 0.5px;
+        }
+
     </style>
 </head>
 <body>
 
     <div id="passwordPage" class="password-container">
+        <!-- Yeni metni ekledik -->
+        <p class="highlight-text">Her adımda yenilik, her çözümde değer katıyoruz.</p>
+        <p class="sub-text">UPS Samsun İlkadım Servis Sağlayıcı</p>
+
         <h1>Sayfaya Erişim İçin Şifre Girin</h1>
         <input type="password" id="passwordInput" placeholder="Şifrenizi girin" onkeydown="checkPasswordEnter(event)">
         <button onclick="checkPassword()">Giriş Yap</button>
