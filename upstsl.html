@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Kod Kesici</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+    .output {
+      margin-top: 20px;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h2>Kodları Yapıştır</h2>
+  <textarea id="inputArea" placeholder="Buraya kodlarını alt alta yapıştır..."></textarea>
+
+  <h2>Çıktı (ilk 18 karakter)</h2>
+  <div class="output" id="outputArea"></div>
+
+  <script>
+    const input = document.getElementById("inputArea");
+    const output = document.getElementById("outputArea");
+
+    input.addEventListener("input", () => {
+      const lines = input.value.split("\n");
+      const processed = lines.map(line => line.substr(0, 18)).join("\n");
+      output.textContent = processed;
+    });
+  </script>
+</body>
+</html>
